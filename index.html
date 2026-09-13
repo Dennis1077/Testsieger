@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#124e3a" />
+  <meta name="description" content="Testsiegerprodukte in der Schweiz sammeln, bewerten und Preise vergleichen." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Testsieger CH" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="icon" href="icon-192.png" />
+  <title>Testsieger Schweiz – Prototyp</title>
+  <style>
+    :root{--bg:#f4f7f5;--card:#fff;--ink:#17221d;--muted:#64736b;--brand:#124e3a;--brand2:#1d7557;--accent:#ffc857;--danger:#a33a3a;--line:#dce5df;--shadow:0 8px 25px rgba(18,78,58,.10)}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    button,input,select,textarea{font:inherit} button{cursor:pointer}
+    .app{max-width:1100px;margin:auto;min-height:100vh}.top{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:16px 18px;box-shadow:var(--shadow)}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:21px;margin:0}.brand p{margin:3px 0 0;font-size:12px;opacity:.85}.count{background:#ffffff20;border:1px solid #ffffff35;border-radius:999px;padding:7px 10px;font-size:12px}
+    main{padding:16px 16px 90px}.toolbar{display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:14px}.search{width:100%;border:1px solid var(--line);border-radius:13px;padding:13px 14px;background:#fff}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:700}.primary{background:var(--brand);color:white}.secondary{background:#e2eee8;color:var(--brand)}.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:#f8e8e8;color:var(--danger)}
+    .filters{display:flex;gap:8px;overflow:auto;padding:1px 0 13px}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;color:var(--muted)}.chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.035)}.photo{height:155px;background:#e9efeb;display:grid;place-items:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:42px}.cb{padding:13px}.row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.title{font-weight:800;font-size:16px}.muted{color:var(--muted);font-size:12px}.badge{display:inline-flex;background:#fff3cd;color:#735a00;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;margin-top:7px}.badgever{background:#dff3e8;color:#155d42}.price{font-weight:900;color:var(--brand);white-space:nowrap}.rating{display:flex;gap:7px;margin-top:11px}.rate{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px}.rate.on{background:#dff3e8;border-color:#7bb99e}.actions{display:flex;gap:7px;margin-top:10px}.actions button{flex:1;padding:8px;border-radius:10px;border:1px solid var(--line);background:#fff}.empty{text-align:center;background:#fff;border:1px dashed #b9c8c0;border-radius:18px;padding:40px 20px;color:var(--muted)}
+    .fab{position:fixed;right:max(18px,calc((100vw - 1100px)/2 + 18px));bottom:20px;border:0;border-radius:999px;background:var(--accent);color:#322600;font-weight:900;padding:15px 19px;box-shadow:0 8px 22px #0003}
+    dialog{border:0;border-radius:20px;padding:0;width:min(720px,calc(100% - 24px));max-height:90vh;box-shadow:0 20px 70px #0005}dialog::backdrop{background:#10251db5}.modalhead{position:sticky;top:0;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--line);z-index:2}.modalhead h2{margin:0;font-size:19px}.close{border:0;background:#eef3f0;border-radius:50%;width:36px;height:36px}.form{padding:16px}.section{margin:0 0 18px}.section h3{font-size:14px;margin:0 0 10px;color:var(--brand)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;background:#fff}textarea{min-height:70px;resize:vertical}.formfoot{display:flex;justify-content:flex-end;gap:9px;padding-top:5px}.scanbox{background:#eaf3ee;border-radius:14px;padding:12px;margin-bottom:13px}.scanline{display:flex;gap:8px;flex-wrap:wrap}.scanline input{flex:1;min-width:180px}.scanstatus{font-size:12px;color:var(--muted);margin-top:7px}.offers{display:grid;gap:7px}.offerline{display:grid;grid-template-columns:1.2fr .8fr .9fr auto;gap:7px}.offerline button{border:0;border-radius:9px;background:#f8e8e8;color:var(--danger)}
+    .tools{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}.tools button,.tools label{margin:0}.filebtn{display:inline-block;border-radius:12px;padding:10px 12px;font-weight:700;background:#fff;border:1px solid var(--line);color:var(--ink);cursor:pointer}.filebtn input{display:none}
+
+    .shoppingbar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin:0 0 13px;box-shadow:0 3px 12px rgba(0,0,0,.03)}
+    .shoppingbar .shophead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}.shoppingbar h2{font-size:14px;margin:0;color:var(--brand)}
+    .shopcontrols{display:grid;grid-template-columns:1fr auto auto;gap:8px}.shopselect{margin:0}.shoppingbar.active{border-color:#7bb99e;background:#f1faf5}
+    .shopping-summary{font-size:12px;color:var(--muted);margin-top:8px}.buycheck{display:flex;align-items:center;gap:7px;margin-top:10px;padding:8px 9px;border-radius:10px;background:#f4f7f5;font-size:13px}.buycheck input{width:auto;margin:0}.bought{opacity:.58}.bought .title{text-decoration:line-through}
+    .storetag{display:inline-flex;background:#e6efff;color:#244d82;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;margin:7px 5px 0 0}
+    @media(max-width:600px){.shopcontrols{grid-template-columns:1fr 1fr}.shopcontrols .shopselect{grid-column:1/-1}}
+    #cameraBox{display:none;margin-top:10px}video{width:100%;max-height:320px;border-radius:12px;background:#111}.notice{font-size:11px;color:var(--muted);line-height:1.35;margin-top:10px}
+    @media(max-width:600px){.fields{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{grid-template-columns:1fr}.offerline{grid-template-columns:1fr 1fr}.offerline button{grid-column:2}.topline{align-items:flex-start}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="topline"><div class="brand"><h1>🏆 Testsieger Schweiz</h1><p>Produkte sammeln, bewerten und Preise vergleichen</p></div><div class="count" id="count">0 Produkte</div></div></header>
+  <main>
+    <div class="toolbar"><input id="search" class="search" placeholder="Produkt, Marke, Barcode oder Händler suchen …"><button class="btn secondary" id="scanTop">▣ Barcode scannen</button></div>
+    <div class="filters" id="filters"></div>
+
+    <section class="shoppingbar" id="shoppingBar">
+      <div class="shophead"><h2>🛒 Einkaufsmodus</h2><span class="muted" id="shoppingState">Alle Händler</span></div>
+      <div class="shopcontrols">
+        <select id="retailerFilter" class="shopselect" aria-label="Händler auswählen"><option value="Alle">Alle Händler</option></select>
+        <button class="btn secondary" id="shopModeBtn" type="button">Einkaufsmodus starten</button>
+        <button class="btn ghost" id="resetBoughtBtn" type="button">Haken zurücksetzen</button>
+      </div>
+      <div class="shopping-summary" id="shoppingSummary">Wähle einen Händler, um deine dort erhältlichen Produkte zu sehen.</div>
+    </section>
+
+    <div class="tools"><button class="btn primary" id="installBtn" hidden>App installieren</button><button class="btn ghost" id="demoBtn">Beispieldaten laden</button><button class="btn ghost" id="exportBtn">JSON exportieren</button><label class="filebtn">JSON importieren<input type="file" id="importFile" accept="application/json"></label><button class="btn ghost" id="csvBtn">CSV exportieren</button></div>
+    <div id="list" class="grid"></div>
+  </main>
+  <button class="fab" id="addBtn">＋ Produkt</button>
+</div>
+
+<dialog id="productDialog">
+  <div class="modalhead"><h2 id="dialogTitle">Produkt hinzufügen</h2><button class="close" id="closeDialog">✕</button></div>
+  <form class="form" id="productForm">
+    <input type="hidden" id="pid">
+    <div class="scanbox">
+      <div class="scanline"><input id="barcode" inputmode="numeric" placeholder="EAN / GTIN eingeben"><button type="button" class="btn secondary" id="lookupBtn">Daten suchen</button><button type="button" class="btn primary" id="cameraBtn">Kamera</button></div>
+      <div id="cameraBox"><video id="video" autoplay playsinline></video><button type="button" class="btn danger" id="stopCamera" style="margin-top:8px">Kamera stoppen</button></div>
+      <div class="scanstatus" id="scanStatus">Der Scanner sucht zuerst lokal und kann bei Lebensmitteln Open Food Facts abfragen.</div>
+    </div>
+    <div class="section"><h3>Produkt</h3><div class="fields">
+      <div><label>Produktname *</label><input id="name" required></div><div><label>Marke</label><input id="brand"></div>
+      <div><label>Kategorie</label><select id="category"><option>Lebensmittel</option><option>Reinigungsmittel</option><option>Waschmittel</option><option>Haushalt & Küche</option><option>Körperpflege & Kosmetik</option><option>Elektrogeräte</option><option>Werkzeuge</option><option>Bürobedarf</option><option>Tierbedarf</option><option>Baby & Familie</option><option>Sonstiges</option></select></div>
+      <div><label>Packungsgrösse / Modell</label><input id="size" placeholder="z. B. 750 ml oder Modell XY"></div>
+      <div class="full"><label>Bild-URL</label><input id="imageUrl" placeholder="https://…"></div>
+      <div class="full"><label>Oder eigenes Bild</label><input type="file" id="imageFile" accept="image/*" capture="environment"></div>
+      <div><label>Glutenfrei</label><select id="gluten"><option value="">Nicht relevant / unklar</option><option>Ja</option><option>Nein</option></select></div><div><label>Status</label><select id="rating"><option value="neutral">Noch nicht ausprobiert</option><option value="like">Gefällt / schmeckt mir</option><option value="dislike">Gefällt / schmeckt mir nicht</option></select></div>
+      <div class="full"><label>Notiz</label><textarea id="notes"></textarea></div>
+    </div></div>
+    <div class="section"><h3>Test-Auszeichnung</h3><div class="fields">
+      <div><label>Auszeichnung</label><input id="award" placeholder="Testsieger, Kauftipp …"></div><div><label>Testorganisation</label><input id="testOrg" placeholder="z. B. Kassensturz"></div>
+      <div><label>Testnote</label><input id="testScore"></div><div><label>Ausgabe / Jahr</label><input id="testIssue"></div>
+      <div class="full"><label>Quellenlink</label><input id="sourceUrl" type="url" placeholder="https://…"></div>
+    </div></div>
+    <div class="section"><div class="row"><h3>Preise & Bezugsquellen</h3><button type="button" class="btn secondary" id="addOffer">＋ Preis</button></div><div id="offers" class="offers"></div></div>
+    <div class="formfoot"><button type="button" class="btn ghost" id="cancelBtn">Abbrechen</button><button class="btn primary" type="submit">Produkt speichern</button></div>
+    <div class="notice">Hinweis: Automatisch geladene Produkteigenschaften und Allergendaten können unvollständig sein. Bei Zöliakie immer die aktuelle Verpackung prüfen. Testauszeichnungen nur mit überprüfbarem Quellenlink eintragen.</div>
+  </form>
+</dialog>
+
+<script>
+const KEY='testsieger-schweiz-v1';
+const storage={available:false,get(key){try{const t='__ts_test__';localStorage.setItem(t,'1');localStorage.removeItem(t);this.available=true;return localStorage.getItem(key)}catch(e){this.available=false;return null}},set(key,val){try{localStorage.setItem(key,val);this.available=true;return true}catch(e){this.available=false;return false}}};
+let products=[];try{const raw=storage.get(KEY);products=raw?JSON.parse(raw):[];if(!Array.isArray(products))products=[]}catch(e){products=[]} let filter='Alle'; let retailer='Alle'; let shoppingMode=false; let stream=null; let scanTimer=null;
+const $=id=>document.getElementById(id); const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function save(){storage.set(KEY,JSON.stringify(products));render()}
+function money(v){return v?new Intl.NumberFormat('de-CH',{style:'currency',currency:'CHF'}).format(Number(v)):''}
+function bestOffer(p){return [...(p.offers||[])].filter(o=>Number(o.price)>0).sort((a,b)=>a.price-b.price)[0]}
+
+function normalizedStore(v){return String(v||'').trim().replace(/\s+/g,' ')}
+function retailerNames(){return [...new Set(products.flatMap(p=>(p.offers||[]).map(o=>normalizedStore(o.store)).filter(Boolean)))].sort((a,b)=>a.localeCompare(b,'de-CH'))}
+function matchesRetailer(p,name){return name==='Alle'||(p.offers||[]).some(o=>normalizedStore(o.store)===name)}
+function selectedOffer(p){const offers=(p.offers||[]).filter(o=>retailer==='Alle'||normalizedStore(o.store)===retailer);return [...offers].filter(o=>Number(o.price)>0).sort((a,b)=>Number(a.price)-Number(b.price))[0]}
+function renderRetailers(){
+  const select=$('retailerFilter'); const names=retailerNames();
+  if(retailer!=='Alle'&&!names.includes(retailer)) retailer='Alle';
+  select.innerHTML=['Alle',...names].map(n=>`<option value="${esc(n)}" ${n===retailer?'selected':''}>${n==='Alle'?'Alle Händler':esc(n)}</option>`).join('');
+  $('shoppingBar').classList.toggle('active',shoppingMode);
+  $('shopModeBtn').textContent=shoppingMode?'Einkaufsmodus beenden':'Einkaufsmodus starten';
+  $('shoppingState').textContent=retailer==='Alle'?'Alle Händler':retailer;
+}
+function renderFilters(){const cats=['Alle','Testsieger','👍 Positiv','👎 Negativ',...new Set(products.map(p=>p.category).filter(Boolean))];$('filters').innerHTML=cats.map(c=>`<button class="chip ${c===filter?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()})}
+function render(){
+  renderFilters(); renderRetailers();
+  const q=$('search').value.toLowerCase();
+  let rows=products.filter(p=>JSON.stringify(p).toLowerCase().includes(q));
+  if(filter==='Testsieger') rows=rows.filter(p=>p.award);
+  else if(filter==='👍 Positiv') rows=rows.filter(p=>p.rating==='like');
+  else if(filter==='👎 Negativ') rows=rows.filter(p=>p.rating==='dislike');
+  else if(filter!=='Alle') rows=rows.filter(p=>p.category===filter);
+  rows=rows.filter(p=>matchesRetailer(p,retailer));
+  if(shoppingMode) rows.sort((a,b)=>Number(!!a.bought)-Number(!!b.bought)||String(a.name).localeCompare(String(b.name),'de-CH'));
+  $('count').textContent=`${products.length} Produkt${products.length===1?'':'e'}`;
+  const openCount=rows.filter(p=>!p.bought).length;
+  $('shoppingSummary').textContent=retailer==='Alle'
+    ? `${rows.length} Produkte sichtbar. Wähle einen Händler für deine Einkaufsliste.`
+    : `${rows.length} Produkte bei ${retailer}, davon ${openCount} noch nicht abgehakt.`;
+  $('list').innerHTML=rows.length?rows.map(p=>{
+    const o=selectedOffer(p)||bestOffer(p);
+    const stores=[...new Set((p.offers||[]).map(x=>normalizedStore(x.store)).filter(Boolean))];
+    return `<article class="card ${shoppingMode&&p.bought?'bought':''}"><div class="photo">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" onerror="this.parentElement.innerHTML='<span class=placeholder>📦</span>'">`:'<span class="placeholder">📦</span>'}</div><div class="cb"><div class="row"><div><div class="title">${esc(p.name)}</div><div class="muted">${esc(p.brand||p.category||'')} ${p.size?'· '+esc(p.size):''}</div></div><div class="price">${o?money(o.price):''}</div></div>${p.award?`<span class="badge ${p.sourceUrl?'badgever':''}">🏆 ${esc(p.award)}${p.sourceUrl?' · Quelle':''}</span>`:''}<div>${stores.map(x=>`<span class="storetag">${esc(x)}</span>`).join('')}</div>${o?`<div class="muted" style="margin-top:7px">${retailer==='Alle'?'Günstigster Preis':'Preis bei '+esc(retailer)}: ${esc(o.store)}${o.place?' · '+esc(o.place):''}</div>`:''}${shoppingMode?`<label class="buycheck"><input type="checkbox" ${p.bought?'checked':''} onchange="toggleBought('${p.id}',this.checked)"> ${p.bought?'Gekauft':'Auf Einkaufsliste'}</label>`:''}<div class="rating"><button class="rate ${p.rating==='like'?'on':''}" onclick="rate('${p.id}','like')">👍 Gut</button><button class="rate ${p.rating==='dislike'?'on':''}" onclick="rate('${p.id}','dislike')">👎 Nicht gut</button></div><div class="actions"><button onclick="editProduct('${p.id}')">Bearbeiten</button><button onclick="removeProduct('${p.id}')">Löschen</button></div></div></article>`
+  }).join(''):`<div class="empty" style="grid-column:1/-1"><div style="font-size:44px">🛒</div><h3>Keine Produkte für diesen Händler</h3><p>Hinterlege den Händler bei einem Produkt unter „Preise & Bezugsquellen“.</p></div>`;
+}
+
+window.toggleBought=(id,value)=>{const p=products.find(x=>x.id===id);if(p){p.bought=!!value;save()}};
+window.rate=(id,r)=>{const p=products.find(x=>x.id===id);p.rating=p.rating===r?'neutral':r;save()};
+window.removeProduct=id=>{if(confirm('Produkt wirklich löschen?')){products=products.filter(x=>x.id!==id);save()}};
+window.editProduct=id=>openDialog(products.find(x=>x.id===id));
+function addOfferRow(o={}){const d=document.createElement('div');d.className='offerline';d.innerHTML=`<input class="ostore" placeholder="Händler" value="${esc(o.store||'')}"><input class="oprice" type="number" min="0" step="0.01" placeholder="CHF" value="${esc(o.price||'')}"><input class="oplace" placeholder="Ort / Link" value="${esc(o.place||'')}"><button type="button">✕</button>`;d.querySelector('button').onclick=()=>d.remove();$('offers').appendChild(d)}
+function resetForm(){$('productForm').reset();$('pid').value='';$('offers').innerHTML='';addOfferRow();$('scanStatus').textContent='Der Scanner sucht zuerst lokal und kann bei Lebensmitteln Open Food Facts abfragen.';$('dialogTitle').textContent='Produkt hinzufügen'}
+function openDialog(p=null){resetForm();if(p){$('dialogTitle').textContent='Produkt bearbeiten';['pid','barcode','name','brand','category','size','gluten','rating','notes','award','testOrg','testScore','testIssue','sourceUrl'].forEach(k=>$(k).value=p[k]||'');$('imageUrl').value=p.image?.startsWith('data:')?'':(p.image||'');$('offers').innerHTML='';(p.offers||[{}]).forEach(addOfferRow)}$('productDialog').showModal()}
+async function fileData(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
+$('productForm').onsubmit=async e=>{e.preventDefault();let image=$('imageUrl').value.trim();if($('imageFile').files[0]) image=await fileData($('imageFile').files[0]);const old=products.find(p=>p.id===$('pid').value);if(!image&&old)image=old.image;const p={id:$('pid').value||crypto.randomUUID(),bought:old?.bought||false,barcode:$('barcode').value.trim(),name:$('name').value.trim(),brand:$('brand').value.trim(),category:$('category').value,size:$('size').value.trim(),image,gluten:$('gluten').value,rating:$('rating').value,notes:$('notes').value.trim(),award:$('award').value.trim(),testOrg:$('testOrg').value.trim(),testScore:$('testScore').value.trim(),testIssue:$('testIssue').value.trim(),sourceUrl:$('sourceUrl').value.trim(),offers:[...document.querySelectorAll('.offerline')].map(d=>({store:d.querySelector('.ostore').value.trim(),price:Number(d.querySelector('.oprice').value)||'',place:d.querySelector('.oplace').value.trim(),date:new Date().toISOString().slice(0,10)})).filter(o=>o.store||o.price)};const i=products.findIndex(x=>x.id===p.id);i>=0?products[i]=p:products.unshift(p);save();$('productDialog').close();stopCamera()};
+async function lookup(){const code=$('barcode').value.trim();if(!code)return $('scanStatus').textContent='Bitte Barcode eingeben oder scannen.';const local=products.find(p=>p.barcode===code);if(local){$('scanStatus').textContent='Produkt bereits lokal vorhanden. Angaben wurden übernommen.';['name','brand','category','size'].forEach(k=>$(k).value=local[k]||'');$('imageUrl').value=local.image?.startsWith('http')?local.image:'';return} $('scanStatus').textContent='Suche bei Open Food Facts …';try{const r=await fetch(`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(code)}.json?fields=product_name,brands,quantity,image_front_url,categories_tags,labels_tags`);const j=await r.json();if((j.status===1 || j.code) && j.product){const p=j.product;$('name').value=p.product_name||'';$('brand').value=p.brands||'';$('size').value=p.quantity||'';$('imageUrl').value=p.image_front_url||'';$('category').value='Lebensmittel';const labels=(p.labels_tags||[]).join(' ');if(labels.includes('gluten-free'))$('gluten').value='Ja';$('scanStatus').textContent='Produktdaten gefunden. Bitte vor dem Speichern prüfen.'}else $('scanStatus').textContent='Kein Datensatz gefunden. Bitte Produkt manuell ergänzen.'}catch(err){console.error(err);$('scanStatus').textContent='Online-Suche durch Vorschau, Netzwerk oder Browser blockiert. Öffne die installierte HTTPS-App oder ergänze das Produkt manuell.'}}
+async function startCamera(){if(!navigator.mediaDevices?.getUserMedia){$('scanStatus').textContent='Kamerazugriff wird hier nicht unterstützt. Barcode bitte manuell eingeben.';return}if(!('BarcodeDetector' in window)){$('scanStatus').textContent='Dieser Browser unterstützt die automatische Barcode-Erkennung nicht. Bitte Chrome auf Android oder die manuelle Eingabe verwenden.';return}try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}});$('video').srcObject=stream;$('cameraBox').style.display='block';const detector=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']});const tick=async()=>{if(!stream)return;try{const codes=await detector.detect($('video'));if(codes[0]){$('barcode').value=codes[0].rawValue;stopCamera();lookup();return}}catch(e){}scanTimer=setTimeout(tick,400)};tick()}catch(e){$('scanStatus').textContent='Kamera konnte nicht geöffnet werden. HTTPS und Kameraberechtigung prüfen.'}}
+function stopCamera(){clearTimeout(scanTimer);scanTimer=null;if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('cameraBox').style.display='none'}
+$('addBtn').onclick=()=>openDialog();$('scanTop').onclick=()=>{openDialog();setTimeout(startCamera,200)};$('closeDialog').onclick=()=>{$('productDialog').close();stopCamera()};$('cancelBtn').onclick=()=>{$('productDialog').close();stopCamera()};$('addOffer').onclick=()=>addOfferRow();$('lookupBtn').onclick=lookup;$('cameraBtn').onclick=startCamera;$('stopCamera').onclick=stopCamera;$('search').oninput=render;
+$('retailerFilter').onchange=e=>{retailer=e.target.value;render()};
+$('shopModeBtn').onclick=()=>{shoppingMode=!shoppingMode;render()};
+$('resetBoughtBtn').onclick=()=>{products.forEach(p=>p.bought=false);save()};
+$('demoBtn').onclick=()=>{if(products.length&&!confirm('Beispieldaten zusätzlich laden?'))return;const demo=[{id:crypto.randomUUID(),barcode:'7610000000001',name:'UltraClean Allzweckreiniger',brand:'Helvetia Home',category:'Reinigungsmittel',size:'750 ml',image:'',gluten:'',rating:'like',notes:'Angenehmer Duft, sparsam dosierbar.',award:'Testsieger (Demo)',testOrg:'Beispiel-Test',testScore:'Sehr gut',testIssue:'2026',sourceUrl:'',offers:[{store:'Coop',price:4.95,place:'Zürich',date:'2026-09-13'},{store:'Galaxus',price:5.40,place:'Online',date:'2026-09-13'}]},{id:crypto.randomUUID(),barcode:'7610000000002',name:'Knusper-Cracker glutenfrei',brand:'AlpenBiss',category:'Lebensmittel',size:'150 g',image:'',gluten:'Ja',rating:'neutral',notes:'Verpackungsangaben vor Verzehr prüfen.',award:'Kauftipp (Demo)',testOrg:'Beispiel-Test',testScore:'Gut',testIssue:'2026',sourceUrl:'',offers:[{store:'Migros',price:3.80,place:'Uster',date:'2026-09-13'}]}];products=[...demo,...products];save()};
+$('exportBtn').onclick=()=>download(JSON.stringify(products,null,2),'testsieger-schweiz.json','application/json');
+$('csvBtn').onclick=()=>{const h=['Barcode','Produkt','Marke','Kategorie','Bewertung','Auszeichnung','Testorganisation','Händler','Preis CHF','Ort'];const rows=[h,...products.flatMap(p=>(p.offers?.length?p.offers:[{}]).map(o=>[p.barcode,p.name,p.brand,p.category,p.rating,p.award,p.testOrg,o.store,o.price,o.place]))];download('\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n'),'testsieger-schweiz.csv','text/csv;charset=utf-8')};
+function download(content,name,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
+$('importFile').onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());if(!Array.isArray(data))throw 0;products=data;save();alert('Import erfolgreich.')}catch{alert('Die Datei ist kein gültiger Testsieger-Export.')}};
+let deferredInstallPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn').hidden=false});
+$('installBtn').onclick=async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn').hidden=true};
+window.addEventListener('appinstalled',()=>{$('installBtn').hidden=true;deferredInstallPrompt=null});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Service Worker:',err)))};
+render();
+</script>
+</body>
+</html>
